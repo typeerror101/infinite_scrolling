@@ -29,10 +29,23 @@ export default function App() {
     setQuery(e.target.value)
     setPageNumber(1)
   }
+
+  function animation(){
+    if(loading){
+      return(
+      <div class="loadingio-spinner-pulse-hhp2ti51u89">
+          <div class="ldio-5a220u1vixl">
+      <div></div><div></div><div></div>
+      </div></div>
+      )
+    } else return
+  }
    
   return (
     <>
-      <input type="text" value={query} onChange={handleSearch} placeholder="Search Book Name"/>
+    <h1>Open Library Infinite Scroll Search</h1>
+      <input className='search' type="text" value={query} onChange={handleSearch} placeholder="Search Book Name"/>
+      <div className='results'>
       {books.map((book, index) => {
           if(books.length === index + 1){
             return <div ref={lastBookElementRef} key={book}>{book}</div>
@@ -40,7 +53,8 @@ export default function App() {
             return <div key={book}>{book}</div>
           }
       })}
-      <div>{loading && 'Loading...'}</div>
+      </div>
+      <div className='loading'>{loading && animation()}</div>
       <div>{error && 'Error'}</div>
     </>
   );
